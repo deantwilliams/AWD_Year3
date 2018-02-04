@@ -1,1 +1,24 @@
 <h1>Admin</h1>
+
+<form name="itemForm">
+
+    Item Name: <input type="text" ng-model="item.name"><br>
+    Item Price: <input type="number" ng-model="item.price"><br>
+    Item ID: <input type="number" ng-model="item.id"><br>
+    
+    <button ng-click="createItem( item )">Add this item</button><br><br>
+</form>
+
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Price</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="item in allItems | orderBy : 'id'">
+		<td>{{ item.id }}</td>
+		<td>{{ item.name }}</td>
+		<td>£{{ item.price }}</td>
+	</tr>
+</table>

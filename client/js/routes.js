@@ -5,15 +5,14 @@ myApp.config( function( $routeProvider, $locationProvider ){
 
         .when('/', { templateUrl: 'views/home.html' })
 
-        .when('/admin', { templateUrl: 'views/admin.html', controller: 'adminController', controllerAs: 'ctrl' })
-        .when('/kitchen', { templateUrl: 'views/kitchen.html', controller: 'kitchenController', controllerAs: 'ctrl' })
-        .when('/counter', { templateUrl: 'views/counter.html', controller: 'counterController', controllerAs: 'ctrl' })
-        .when('/server', { templateUrl: 'views/server.html', controller: 'serverController', controllerAs: 'ctrl' })
+        .when('/admin', { templateUrl: 'views/admin.html', controller: 'adminController' })
+        .when('/kitchen', { templateUrl: 'views/kitchen.html', controller: 'kitchenController' })
+        .when('/counter', { templateUrl: 'views/counter.html', controller: 'counterController' })
+        .when('/server', { templateUrl: 'views/server.html', controller: 'serverController' })
 
         // viewing individual items and orders
-        .when('/orders/:id', { templateUrl: 'views/order.html', controller: 'counterController', controllerAs: 'ctrl' })
-        .when('/items/:id', { templateUrl: 'views/item.html', controller: 'adminController', controllerAs: 'ctrl' })
-
+        .when('/orders/:id', { templateUrl: 'views/order.html', controller: 'counterController' })
+        .when('/items/:id', { templateUrl: 'views/item.html', controller: 'adminController' })
 
         .otherwise({ templateUrl: 'views/404.html' });
 

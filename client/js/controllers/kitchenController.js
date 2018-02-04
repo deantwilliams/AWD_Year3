@@ -1,7 +1,5 @@
-angular.module('myApp').controller('kitchenController', [ '$routeParams', '$location', '$route', 'ItemService', 'OrderService', function( $routeParams, $location, $route, ItemService, OrderService ){
-    var vm = this;
+angular.module('myApp').controller('kitchenController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', function( $routeParams, $location, $route, $scope, ItemService, OrderService ){
 
-
-
+	$scope.title = "Kitchen"
 
 }]);

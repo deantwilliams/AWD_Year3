@@ -2,3 +2,8 @@
 	padding: 50px 50px;
 	text-align: center;
 }
+
+table tr td, table tr th{
+	padding:10px;
+	text-align: left;
+}

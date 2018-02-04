@@ -19,12 +19,12 @@ exports.create = function( req, res ){
     var item = new Item({ id: req.body.id, name: req.body.name, price: req.body.price });
 
     item.save( function( err ){
+        
         if( err ){
             console.log( "error: " + err );
             return res.status(500).json({ errors: "Could not create item" });
         } 
 
-        console.log("item added: " + item);
         res.status( 201 ).json( item );
 
     });
