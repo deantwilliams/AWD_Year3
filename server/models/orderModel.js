@@ -6,6 +6,7 @@ var orderSchema = mongoose.Schema({
 	tableNumber: Number,
 	paid: Boolean,
 	items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+	price: Number,
 	placed: { type: Date, default: Date.now }
 	
 });
