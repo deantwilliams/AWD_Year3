@@ -16,7 +16,7 @@ exports.list = function( req, res ){
 
 exports.create = function( req, res ){
 
-    var order = new Order({ tableNumber: req.body.tableNumber, items: req.body.items, price: req.body.price, paid: false });
+    var order = new Order({ tableNumber: req.body.tableNumber, items: req.body.items, price: req.body.price, paid: false, placed: Date.Now });
 
     order.save( function( err ){
         if( err ){
