@@ -1,0 +1,56 @@
+<h2>Waiter</h2>
+
+<div id="tables">
+
+	<div class="row">
+		<div class="col-xs-3"><a ng-click="selectTable(1)"><div class="table">Table 1</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(2)"><div class="table">Table 2</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(3)"><div class="table">Table 3</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(4)"><div class="table">Table 4</div></a></div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-3"><a ng-click="selectTable(5)"><div class="table">Table 5</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(6)"><div class="table">Table 6</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(7)"><div class="table">Table 7</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(8)"><div class="table">Table 8</div></a></div>
+	</div>
+
+</div><!-- end tables -->
+
+<div id="orderFormDiv" ng-if="showOrderForm">
+	<h3>Creating order for table: {{order.tableNumber}}</h3>
+
+	<form id="orderForm">
+
+		Number of people seated: <input type="number" ng-model="order.numberOfPeople" /><br>
+
+		<select name="itemSelect" id="itemSelect" ng-model="selectedItem" ng-options="item as item.name for item in allItems"> 
+            <option value="">Select an item</option>
+        </select>
+        <button ng-click="addItemToOrder( selectedItem )">Add item to order</button>
+
+        <br><br>
+
+        <table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Remove</th>
+			</tr>
+			<tr ng-repeat="item in order.items">
+				<td>{{ item.item.id }}</td>
+				<td>{{ item.item.name }}</td>
+				<td>£{{ item.item.price }}</td>
+				<td><input type="number" ng-model="item.quantity" /></td>
+				<td><button ng-click="removeItemFromOrder( item )">Remove</button></td>
+			</tr>
+		</table>
+		<br><br>
+
+		<button ng-click="createOrder( order )">Submit order</button>
+	</form>
+
+</div><!-- end orderForm -->

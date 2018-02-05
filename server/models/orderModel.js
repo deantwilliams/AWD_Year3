@@ -4,9 +4,10 @@ var Item = require( './itemModel' );
 var orderSchema = mongoose.Schema({
 
 	tableNumber: Number,
-	paid: Boolean,
-	items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
-	price: Number,
+	paid: { type: Boolean, default: false },
+	items: [{ 	item: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' }, 
+				quantity: Number 
+			}],
 	placed: { type: Date, default: Date.now }
 	
 });
