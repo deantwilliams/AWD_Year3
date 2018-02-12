@@ -1,4 +1,6 @@
 var express 		= require('express');
+var socketio          = require( 'socket.io' )
+var http              = require( 'http' )
 var path 			= require('path');
 var favicon 		= require('serve-favicon');
 var logger 			= require('morgan');
@@ -56,5 +58,12 @@ app.use(function(err, req, res) {
 //   res.status(err.status || 500);
 //   res.render('error');
 // });
+
+
+// Attach Socket.io
+var server = http.createServer( app );
+var io = socketio.listen( server );
+app.set( 'socketio', io );
+app.set( 'server', server );
 
 module.exports = app;

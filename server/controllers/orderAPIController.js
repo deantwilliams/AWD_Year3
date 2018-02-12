@@ -28,6 +28,11 @@ exports.create = function( req, res ){
         } 
 
         console.log("order added: " + order);
+
+
+        var socketio = req.app.get('socketio');
+        socketio.sockets.emit('order.added', order);
+
         res.status( 201 ).json( order );
 
     });
