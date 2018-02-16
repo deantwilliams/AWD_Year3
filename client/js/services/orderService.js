@@ -5,6 +5,7 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
       getOrder: getOrder,
       createOrder: createOrder,
       deleteOrder: deleteOrder,
+	  completeOrder: completeOrder
     });
 
 
@@ -62,5 +63,7 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
       return deferred.promise;
     }
 
-
+	function completeOrder(order){
+		return $http({ method: 'PATCH', url: '/api/order/'+order._id, data: 1 });
+	}
 }]);

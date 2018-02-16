@@ -8,10 +8,13 @@ table tr td, table tr th{
 	text-align: left;
 }
 
-.table{
+.kitchen tr td, table tr th{
 	border-style: solid;
 	border-radius: 5px;
 	border-width: 1px;
 	padding: 5px;
 	margin:5px;
+	text-align: center;
 }
+
+.
