@@ -25,6 +25,10 @@ exports.create = function( req, res ){
             return res.status(500).json({ errors: "Could not create item" });
         } 
 
+
+        var socketio = req.app.get('socketio');
+        socketio.sockets.emit('item.created', item);
+        
         res.status( 201 ).json( item );
 
     });
