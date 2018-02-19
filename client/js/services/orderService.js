@@ -3,7 +3,7 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
     return ({
       getOrders: getOrders,
       getOrder: getOrder,
-      getOrdersForTable: getOrdersForTable,
+      getUnpaidOrders: getUnpaidOrders,
       createOrder: createOrder,
       deleteOrder: deleteOrder,
       updateOrder: updateOrder,
@@ -66,11 +66,11 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
     }
 
 
-    function getOrdersForTable( tableNumber ){
+    function getUnpaidOrders( ){
       
       var deferred = $q.defer();
 
-      $http.get( '/api/orders/forTable/'+tableNumber ).then(
+      $http.get( '/api/orders/unpaid' ).then(
         function successCallback( res ) {
 
             if( res.data.orders ){

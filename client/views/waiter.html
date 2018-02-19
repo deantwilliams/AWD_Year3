@@ -1,6 +1,6 @@
 <h2>Waiter</h2>
 
-<div id="tables" ng-if="tableAvailable">
+<div id="tables" ng-if="tablesChecked">
 
 	<div class="row">
 		<div class="col-xs-3">
@@ -76,7 +76,7 @@
 				<td>{{ item.item.id }}</td>
 				<td>{{ item.item.name }}</td>
 				<td>£{{ item.item.price }}</td>
-				<td><input type="number" ng-model="item.quantity" /></td>
+				<td><input type="number" ng-model="item.quantity" min="1"/></td>
 				<td><button ng-click="removeItemFromOrder( item )">Remove</button></td>
 			</tr>
 		</table>

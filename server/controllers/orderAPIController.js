@@ -27,9 +27,6 @@ exports.create = function( req, res ){
             return res.status(500).json({ errors: "Could not create order" });
         } 
 
-        console.log("order added: " + order);
-
-
         var socketio = req.app.get('socketio');
         socketio.sockets.emit('order.added', order);
 
@@ -95,11 +92,9 @@ exports.updateOrder = function(req,res) {
 
 
 
-exports.getOrdersForTable = function(req, res) {
+exports.getUnpaidOrders = function(req, res) {
 
-    var tableNumber = req.params.tableNumber;
-
-    Order.find({ 'tableNumber': tableNumber })
+    Order.find({ 'paid': false })
     .exec( function( err, orders ){
 
         if( err ){  

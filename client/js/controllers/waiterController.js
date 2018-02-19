@@ -1,4 +1,4 @@
-angular.module('myApp').controller('waiterController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', function( $routeParams, $location, $route, $scope, ItemService, OrderService ){
+angular.module('myApp').controller('waiterController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', 'SocketService', function( $routeParams, $location, $route, $scope, ItemService, OrderService, SocketService ){
 
 	$scope.order = {
 
@@ -7,7 +7,16 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 		items: []
 	}
 
-	$scope.tableAvailable = [ 
+
+	ItemService.getItems().then( function( allItems ){
+
+		$scope.allItems = allItems
+	})
+
+
+	var checkTableAvailability = function(){
+
+		$scope.tableAvailable = [ 
 
 			false, //index 0
 			
@@ -21,45 +30,23 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 			true
 		]
 
-
-	ItemService.getItems().then( function( allItems ){
-
-		$scope.allItems = allItems
-	})
-
-	var isTableAvailable = function( tableNumber ){
-
-		OrderService.getOrdersForTable( tableNumber ).then( function( orders ){
+		OrderService.getUnpaidOrders( ).then( function( orders ){
 
 			for( x in orders ){
 
-				if( orders[x].paid === false ){
-
-					$scope.tableAvailable[tableNumber] = false
-
-				}
+				$scope.tableAvailable[ orders[x].tableNumber ] = false
 
 			}
 
+			$scope.tablesChecked = true
 
 		})
-
-	}
-
-	var checkTableAvailability = function(){
-
-		for( var i = 1; i<9; i++){
-
-			isTableAvailable( i )
-
-		}
 
 	}
 
 
 	checkTableAvailability();
 	
-s
 
 	$scope.selectTable = function( tableNumber ){
 
@@ -88,7 +75,7 @@ s
 
 		OrderService.createOrder( order ).then( function( createdOrder ){ 
 
-			resetForm();
+			$scope.resetForm();
             alert( "Order sent to the kitchen" );
 
         }, function(){
@@ -109,6 +96,30 @@ s
 		$scope.showOrderForm = false;
 
 	}
+
+	SocketService.on('order.added', function( order ){
+		OrderService.getOrder(order._id).then(function( newOrder ){
+			$scope.$applyAsync( function(){
+
+				$scope.tableAvailable[ newOrder.tableNumber ] = false; 
+
+            });
+		})
+    });
+
+    SocketService.on('order.paid', function( order ){
+		OrderService.getOrder(order._id).then(function( orderPaid ){
+			$scope.$applyAsync( function(){
+
+				$scope.tableAvailable[ orderPaid.tableNumber ] = true; 
+
+            });
+		})
+    });
+   
+    $scope.$on( '$destroy', function( event ){
+      SocketService.getSocket().removeAllListeners();
+    });
 
 
 
