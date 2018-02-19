@@ -1,17 +1,16 @@
 <h2>Kitchen</h2>
-
 <div id="kitchenDiv">
 	<div id="orders" ng-if="showOrdersKitchen">
-		<div ng-repeat="order in allOrders">
+		<div ng-repeat="order in allOrders | filter:{{order.kitcheComplete |isKitchenComplete}}>
 			<table class="kitchen">
 				<tr><th colspan=4>Table {{ order.tableNumber }} Order</th></tr>
 				<tr><td colspan=4>Wait Time: <strong>{{ order.placed | waitTime }}</strong> </td><input</tr>
 				<tr><th>ID</th><th>Name</th><th>Quantity</th><th></th></tr>
-				<tr ng-repeat="item in order.items">
+				<tr id="{{order._id}}/{{order.items.indexOf(item)}}" class="" ng-repeat="item in order.items">
 					<td>{{ item.item.id }}</td>
 					<td>{{ item.item.name }} </td>
 					<td>{{ item.quantity }}</td>
-					<td><button ng-click="strikeItemFromOrder(item)">Ready</button></td>
+					<td><button id="{{order._id}}/{{order.items.indexOf(item)}}btn" ng-click="strikeItemFromOrder(order._id +'/'+order.items.indexOf(item))">Ready</button></td>
 				</tr>
 				<tr><td colspan=4><button ng-click="orderComplete(order)">Order Complete</button></td><tr>
 			</table>

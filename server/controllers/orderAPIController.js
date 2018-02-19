@@ -56,11 +56,13 @@ exports.delete = function( req, res ){
 };
 
 
-exports.lookupOrder = function(req, res, next) {
+exports.lookupOrder = function(req, res) {
 
     var id = req.params.id;
 
-    Order.findOne({ '_id': id }, function( err, order ){
+    Order.findOne({ '_id': id })
+	.populate('items.item')
+    .exec( function( err, order ){
 
         if( err ){  
             console.log( err ); 
@@ -72,8 +74,21 @@ exports.lookupOrder = function(req, res, next) {
             return res.status(404).json({ errors: "No such order" });
         } 
         
-        req.order = order;
-        next();
+        res.json({order:order});
     });
   
+}
+
+exports.updateOrder = function(req,res) {
+	var id = req.params.id;
+	
+	Order.findByIdAndUpdate(id, { $set: req.body }, {new: true}, (err, order) => {  
+
+        if( err ){
+            console.log( "error: " + err );
+            return res.status(500).json({ errors: "Could not update order" });
+        } 
+
+        res.status( 200 ).json({ message: "Order updated!", order });
+    });
 }

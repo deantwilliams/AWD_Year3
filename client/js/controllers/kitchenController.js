@@ -1,9 +1,10 @@
 var app = angular.module('myApp');
 
-app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$scope', '$interval', 'ItemService', 'OrderService', function( $routeParams, $location, $route, $scope, $interval, ItemService, OrderService){
+app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$scope', '$interval', 'ItemService', 'OrderService', 'SocketService', function( $routeParams, $location, $route, $scope, $interval, ItemService, OrderService, SocketService){
 
 	$scope.title = "Kitchen"
-	
+	$scope.allOrders = [];
+
 	OrderService.getOrders().then(function (allOrders){
 		if(allOrders == null || allOrders.length == 0)
 		{
@@ -18,25 +19,46 @@ app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$s
 		}
 	})
 	
-	/*SocketService.on('order.added', function( order ){
+	$scope.strikeItemFromOrder = function(idx)
+	{
+		var row = document.getElementById(idx);
+		row.classList.toggle("kitchenItemStrike");
+		document.getElementById(idx+"btn").style.display = "none";
+	}
+	
+	$scope.orderComplete = function(order)
+	{
+		order.kitchenComplete = true;
+		OrderService.updateOrder(order).then(function(orderDone){
+			alert("Order updated");
+		}, function(){
 
-                $scope.$applyAsync( function(){
-
-                    $scope.allOrders.push( order );    
-              
+            alert( "Order not updated" );
+        });
+	}
+	
+	SocketService.on('order.added', function( order ){
+			OrderService.getOrder(order._id).then(function(newOrder){
+				$scope.$applyAsync( function(){
+					$scope.allOrders.push( newOrder ); 
                 });
-                
+			})
         });
    
     $scope.$on( '$destroy', function( event ){
       SocketService.getSocket().removeAllListeners();
-    });*/
+    });
 	
 	var tick = function(){
 		$scope.now = Date.now();
 	}
 	tick();
 	$interval(tick,1000);
+	
+	$scope.isKitchenComplete = function(order)
+	{
+		
+	}
 }]);
 
 app.filter("waitTime", function(){
@@ -55,4 +77,8 @@ app.filter("waitTime", function(){
 		}
 	})
 
-	
+app.filter("isKitchenComplete",function(){
+	return function(order){
+		return !order.kitchenComplete;
+	}
+})

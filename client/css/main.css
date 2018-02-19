@@ -9,12 +9,21 @@ table tr td, table tr th{
 }
 
 .kitchen tr td, table tr th{
+	border-collapse: collapse;
 	border-style: solid;
 	border-radius: 5px;
 	border-width: 1px;
 	padding: 5px;
 	margin:5px;
 	text-align: center;
+	position: relative;
 }
 
-.
+tr.kitchenItemStrike td:before{
+	content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 1px solid #111;
+    width: 100%;
+}
