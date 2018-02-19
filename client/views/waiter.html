@@ -1,19 +1,51 @@
 <h2>Waiter</h2>
 
-<div id="tables">
+<div id="tables" ng-if="tableAvailable">
 
 	<div class="row">
-		<div class="col-xs-3"><a ng-click="selectTable(1)"><div class="table">Table 1</div></a></div>
-		<div class="col-xs-3"><a ng-click="selectTable(2)"><div class="table">Table 2</div></a></div>
-		<div class="col-xs-3"><a ng-click="selectTable(3)"><div class="table">Table 3</div></a></div>
-		<div class="col-xs-3"><a ng-click="selectTable(4)"><div class="table">Table 4</div></a></div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(1)" ng-class="{ disabledTable: !tableAvailable[1] }">
+				<div class="table">Table 1 <span ng-show="!tableAvailable[1]">[Taken]</span></div>
+			</a>
+		</div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(2)" ng-class="{ disabledTable: !tableAvailable[2] }">
+				<div class="table">Table 2 <span ng-show="!tableAvailable[2]">[Taken]</span></div>
+			</a>
+		</div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(3)" ng-class="{ disabledTable: !tableAvailable[3] }">
+				<div class="table">Table 3 <span ng-show="!tableAvailable[3]">[Taken]</span></div>
+			</a>
+		</div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(4)" ng-class="{ disabledTable: !tableAvailable[4] }">
+				<div class="table">Table 4 <span ng-show="!tableAvailable[4]">[Taken]</span></div>
+			</a>
+		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-xs-3"><a ng-click="selectTable(5)"><div class="table">Table 5</div></a></div>
-		<div class="col-xs-3"><a ng-click="selectTable(6)"><div class="table">Table 6</div></a></div>
-		<div class="col-xs-3"><a ng-click="selectTable(7)"><div class="table">Table 7</div></a></div>
-		<div class="col-xs-3"><a ng-click="selectTable(8)"><div class="table">Table 8</div></a></div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(5)" ng-class="{ disabledTable: !tableAvailable[5] }">
+				<div class="table">Table 5 <span ng-show="!tableAvailable[5]">[Taken]</span></div>
+			</a>
+		</div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(6)" ng-class="{ disabledTable: !tableAvailable[6] }">
+				<div class="table">Table 6 <span ng-show="!tableAvailable[6]">[Taken]</span></div>
+			</a>
+		</div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(7)" ng-class="{ disabledTable: !tableAvailable[7] }">
+				<div class="table">Table 7 <span ng-show="!tableAvailable[7]">[Taken]</span></div>
+			</a>
+		</div>
+		<div class="col-xs-3">
+			<a ng-click="selectTable(8)" ng-class="{ disabledTable: !tableAvailable[8] }">
+				<div class="table">Table 8 <span ng-show="!tableAvailable[8]">[Taken]</span></div>
+			</a>
+		</div>
 	</div>
 
 </div><!-- end tables -->
@@ -50,6 +82,7 @@
 		</table>
 		<br><br>
 
+		<button ng-click="resetForm( )">Cancel order</button>
 		<button ng-click="createOrder( order )">Submit order</button>
 	</form>
 

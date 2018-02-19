@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', orders.list );
+router.get('/forTable/:tableNumber', orders.getOrdersForTable );
 router.post('/', orders.create );
 router.get('/:id', orders.lookupOrder);
 router.patch('/:id',orders.updateOrder);

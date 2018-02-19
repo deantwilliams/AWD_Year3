@@ -92,3 +92,27 @@ exports.updateOrder = function(req,res) {
         res.status( 200 ).json({ message: "Order updated!", order });
     });
 }
+
+
+
+exports.getOrdersForTable = function(req, res) {
+
+    var tableNumber = req.params.tableNumber;
+
+    Order.find({ 'tableNumber': tableNumber })
+    .exec( function( err, orders ){
+
+        if( err ){  
+            console.log( err ); 
+            return res.status(500).json({ errors: "Could not retrieve order" });
+        }
+
+        if( !orders ){
+            console.log( "No order found" );
+            return res.status(404).json({ errors: "No such order" });
+        } 
+        
+        res.json({orders:orders});
+    });
+  
+}

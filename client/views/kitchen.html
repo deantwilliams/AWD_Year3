@@ -1,7 +1,7 @@
 <h2>Kitchen</h2>
 <div id="kitchenDiv">
 	<div id="orders" ng-if="showOrdersKitchen">
-		<div ng-repeat="order in allOrders | filter:{{order.kitcheComplete |isKitchenComplete}}>
+		<div ng-repeat="order in allOrders">
 			<table class="kitchen">
 				<tr><th colspan=4>Table {{ order.tableNumber }} Order</th></tr>
 				<tr><td colspan=4>Wait Time: <strong>{{ order.placed | waitTime }}</strong> </td><input</tr>

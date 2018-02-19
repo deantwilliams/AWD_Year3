@@ -7,12 +7,59 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 		items: []
 	}
 
+	$scope.tableAvailable = [ 
+
+			false, //index 0
+			
+			true, 
+			true, 
+			true, 
+			true, 
+			true, 
+			true, 
+			true, 
+			true
+		]
+
+
 	ItemService.getItems().then( function( allItems ){
 
 		$scope.allItems = allItems
 	})
 
+	var isTableAvailable = function( tableNumber ){
 
+		OrderService.getOrdersForTable( tableNumber ).then( function( orders ){
+
+			for( x in orders ){
+
+				if( orders[x].paid === false ){
+
+					$scope.tableAvailable[tableNumber] = false
+
+				}
+
+			}
+
+
+		})
+
+	}
+
+	var checkTableAvailability = function(){
+
+		for( var i = 1; i<9; i++){
+
+			isTableAvailable( i )
+
+		}
+
+	}
+
+
+	checkTableAvailability();
+	
+s
 
 	$scope.selectTable = function( tableNumber ){
 
@@ -51,7 +98,7 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 	}
 
 
-	var resetForm = function(){
+	$scope.resetForm = function(){
 
 		$scope.order = {
 
@@ -62,6 +109,8 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 		$scope.showOrderForm = false;
 
 	}
+
+
 
 
 }]);
