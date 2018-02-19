@@ -5,6 +5,8 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
       getOrder: getOrder,
       createOrder: createOrder,
       deleteOrder: deleteOrder,
+	  updateOrder: updateOrder,
+	  completeOrder: completeOrder
     });
 
 
@@ -24,8 +26,8 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
       $http.get( '/api/orders/'+id ).then(
         function successCallback( res ) {
 
-            if( res.data ){
-              deferred.resolve( res.data );
+            if( res.data.order ){
+              deferred.resolve( res.data.order );
             } else {
               deferred.reject();
             }
@@ -62,5 +64,11 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
       return deferred.promise;
     }
 
-
+	function updateOrder(order){
+		return $http({ method: 'PATCH', url: '/api/orders/'+order._id, data: order });
+	}
+	
+	function completeOrder(order){
+		return $http({ method: 'PATCH', url: '/api/order/'+order._id, data: 1 });
+	}
 }]);
