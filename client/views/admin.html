@@ -1,24 +1,66 @@
 <h1>Admin</h1>
 
-<form name="itemForm">
-
-    Item Name: <input type="text" ng-model="item.name"><br>
-    Item Price: <input type="number" ng-model="item.price"><br>
-    Item ID: <input type="number" ng-model="item.id"><br>
-    
-    <button ng-click="createItem( item )">Add this item</button><br><br>
-</form>
-
-<table>
-	<tr>
-		<th>ID</th>
-		<th>Name</th>
-		<th>Price</th>
-		<th></th>
-	</tr>
-	<tr ng-repeat="item in allItems | orderBy : 'id'">
-		<td>{{ item.id }}</td>
-		<td>{{ item.name }}</td>
-		<td>£{{ item.price }}</td>
-	</tr>
-</table>
+<div class="menuControls">
+	
+		<h2>Menu</h2>
+		<div class="addItem">
+	
+			<h3>Add item</h3>
+			<form name="addItemForm">
+	
+				Item Name:
+				<input type="text" ng-model="item.name">
+				<br> Item Price:
+				<input type="number" ng-model="item.price">
+				<br> Item ID:
+				<input type="number" ng-model="item.id">
+				<br>
+	
+				<button ng-click="createItem( item )">Add this item</button>
+				<br>
+				<br>
+			</form>
+		</div>
+		<div class="removeItem">
+	
+			<h3>Remove item</h3>
+			<form name="itemForm">
+	
+				<br> Item ID:
+				<input type="number" ng-model="removeItemId">
+				<br>
+	
+				<button ng-click="removeItem( removeItemId )">Delete item</button>
+				<br>
+				<br>
+			</form>
+		</div>
+	
+		<div class="itemList">
+	
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th></th>
+				</tr>
+	
+				<tr ng-repeat="item in allItems" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+	
+					<td>{{ item.id }}</td>
+					<td>{{ item.name }}</td>
+					<td>{{ item.price }}</td>
+					<td>
+						<span>
+							<a>
+								<button type="button" ng-show="hoverEdit">Delete</button>
+							</a>
+						</span>
+					</td>
+	
+				</tr>
+	
+			</table>
+		</div>
+	</div>

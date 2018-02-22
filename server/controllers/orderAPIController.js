@@ -27,9 +27,6 @@ exports.create = function( req, res ){
             return res.status(500).json({ errors: "Could not create order" });
         } 
 
-        console.log("order added: " + order);
-
-
         var socketio = req.app.get('socketio');
         socketio.sockets.emit('order.added', order);
 
@@ -92,4 +89,23 @@ exports.updateOrder = function(req,res) {
         res.status( 200 ).json({ message: "Order updated!", order });
     });
 }
-	
+
+exports.getUnpaidOrders = function(req, res) {
+
+    Order.find({ 'paid': false })
+    .exec( function( err, orders ){
+
+        if( err ){  
+            console.log( err ); 
+            return res.status(500).json({ errors: "Could not retrieve order" });
+        }
+
+        if( !orders ){
+            console.log( "No order found" );
+            return res.status(404).json({ errors: "No such order" });
+        } 
+        
+        res.json({orders:orders});
+    });
+  
+}

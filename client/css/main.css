@@ -8,7 +8,7 @@ table tr td, table tr th{
 	text-align: left;
 }
 
-.kitchen tr td, table tr th{
+.kitchen tr td, table tr th, .table{
 	border-collapse: collapse;
 	border-style: solid;
 	border-radius: 5px;
@@ -26,4 +26,10 @@ tr.kitchenItemStrike td:before{
     left: 0;
     border-bottom: 1px solid #111;
     width: 100%;
+}
+
+.disabledTable {
+    color: #ccc;
+    pointer-events:none;
+
 }
