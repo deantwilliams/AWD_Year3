@@ -9,25 +9,49 @@ module.exports = function (passport) {
 
   router.post('/createadmin', users.create);
 
-  /* GET login page. */
-
-  router.get('/login', function (req, res) {
-    // Display the Login page with any flash message, if any
-    res.render('login', { message: req.flash('message') });
-  });
 
   /* Handle Login POST */
-  router.post('/login', passport.authenticate('login', {
-    successRedirect: '/admin',
-    failureRedirect: '/login',
-    failureFlash: true
-  }));
 
-  /* GET Admin Page */
-  router.get('/admin', isAuthenticated, function (req, res) {
-    res.render('admin', { user: req.user });
+
+    // router.post('/login', passport.authenticate('login', {
+    //   successRedirect: '/admin',
+    //   failureRedirect: '/login',
+    //   failureFlash: true
+    // }));
+    
+  router.post( '/login', function( req, res, next ){
+
+      passport.authenticate('login', function( err, user, info ){
+
+          if( err ){
+            return next( err );
+          }
+
+          if( !user ){
+            
+            return res.status(401).json({
+              err: info
+            });
+          }
+
+          req.logIn( user, function( err ){
+
+              if( err ){
+
+                return res.status( 500 ).json({
+                  err: 'Could not log in user'
+                });
+
+              }
+
+              res.status( 200 ).json({
+
+                status: 'Login successful!'
+              });
+          });
+
+      })( req, res, next );
   });
-
 
   // router.post('/login', function (req, res, next) {
   //   passport.authenticate('login', function (err, user, info) {
@@ -48,17 +72,27 @@ module.exports = function (passport) {
     res.redirect('/');
   });
 
+
+  router.get( '/status', function( req, res ){
+
+    if( !req.isAuthenticated() ){
+      return res.status( 200 ).json({ authenticated: false });
+    }
+    res.status( 200 ).json({ authenticated: true });
+
+  });
+
   return router;
 }
 
 
-var isAuthenticated = function (req, res, next) {
-  console.log("isAuthenticated");
-  // if user is authenticated in the session, call the next() to call the next request handler 
-  // Passport adds this method to request object. A middleware is allowed to add properties to
-  // request and response objects
-  if (req.isAuthenticated())
-    return next();
-  // if the user is not authenticated then redirect him to the login page
-  res.redirect('/');
-}
+// var isAuthenticated = function (req, res, next) {
+//   console.log("isAuthenticated");
+//   // if user is authenticated in the session, call the next() to call the next request handler 
+//   // Passport adds this method to request object. A middleware is allowed to add properties to
+//   // request and response objects
+//   if (req.isAuthenticated())
+//     return next();
+//   // if the user is not authenticated then redirect him to the login page
+//   res.redirect('/');
+// }

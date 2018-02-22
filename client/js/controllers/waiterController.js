@@ -56,8 +56,12 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 
 	$scope.addItemToOrder = function( selectedItem ){
 
-		if ( false ){
+		//if selectedItem is already in the order
+
+		if( false ){
+
 			//prompt user to edit quantity instead
+
 		}else{
 			var itemToAdd = { item: selectedItem, quantity: 1 }
 			$scope.order.items.push( itemToAdd );
@@ -83,7 +87,6 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
             alert( "Order not sent to the kitchen" );
         })
 	}
-
 
 	$scope.resetForm = function(){
 
