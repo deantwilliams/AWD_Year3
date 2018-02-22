@@ -99,6 +99,6 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
 	}
 	
 	function orderPaid(order){
-		return $http({ method: 'PATCH', url: '/api/orders/'+order._id, data: order });
+		return $http({ method: 'PATCH', url: '/api/orders/'+order._id+'/paid', data: order });
 	}
 }]);
