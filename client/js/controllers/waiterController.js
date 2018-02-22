@@ -111,7 +111,9 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
     });
 
     SocketService.on('order.paid', function( order ){
+
 		OrderService.getOrder(order._id).then(function( orderPaid ){
+
 			$scope.$applyAsync( function(){
 
 				$scope.tableAvailable[ orderPaid.tableNumber ] = true; 
