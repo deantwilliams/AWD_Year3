@@ -1,1 +1,53 @@
-<h1>{{ title }}</h1>
+<h1>{{title}}</h1>
+
+<div id="tables">
+
+	<div class="row">
+		<div class="col-xs-3"><a ng-click="selectTable(1)"><div class="table">Table 1</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(2)"><div class="table">Table 2</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(3)"><div class="table">Table 3</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(4)"><div class="table">Table 4</div></a></div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-3"><a ng-click="selectTable(5)"><div class="table">Table 5</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(6)"><div class="table">Table 6</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(7)"><div class="table">Table 7</div></a></div>
+		<div class="col-xs-3"><a ng-click="selectTable(8)"><div class="table">Table 8</div></a></div>
+	</div>
+
+</div><!-- end -->
+
+ <br><br>
+ <div id="Table" ng-if="tableOrdersShow" >
+ <div ng-repeat="order in tableOrders">
+ 
+ <table ng-if = "!order.paid">
+ 
+ <tr>
+ <th> ID </th>
+ <th> Name </th>
+ <th> Price (each)</th>
+ <th> Quantity </th>
+ <th> Price </th>
+ </tr>
+ <tr ng-repeat="item in order.items">
+ <td>{{ item.item.id}}</td>
+ <td>{{ item.item.name}}</td>
+ <td>{{ item.item.price}}</td>
+ <td>{{item.quantity}}</td>
+ <td>{{item.item.price*item.quantity}}</td>
+ 
+ </tr>
+ 
+ <tr> <td colspan=4> <button ng-click="payNow(order)"> Pay Now</button> </td>
+ <td> Total Price : {{totalPrice(order)}}</td>
+ </tr>
+ </table>
+ </div>
+ <br><br>
+ 
+
+ 
+
+ 

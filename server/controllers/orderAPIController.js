@@ -109,3 +109,17 @@ exports.getUnpaidOrders = function(req, res) {
     });
   
 }
+
+exports.orderPaid = function(req,res) {
+	var id = req.params.id;
+	Order.findByIdAndUpdate(id, { $set: req.body }, {new: true}, (err, order) => {  
+		if( err ){
+            console.log( "error: " + err );
+            return res.status(500).json({ errors: "Could not pay for order" });
+        } 
+
+		var socketio = req.app.get('socketio');
+        socketio.sockets.emit('order.paid', order);
+        res.status( 200 ).json({ message: "Payment Complete!", order });
+    });
+}
