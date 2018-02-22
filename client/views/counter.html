@@ -19,24 +19,29 @@
 </div><!-- end -->
 
  <br><br>
- <div id="Table" ng-if="tableOrdersShow">
+ <div id="Table" ng-if="tableOrdersShow" >
  <div ng-repeat="order in tableOrders">
- <table>
+ 
+ <table ng-if = "!order.paid">
+ 
  <tr>
  <th> ID </th>
  <th> Name </th>
- <th> Price </th>
+ <th> Price (each)</th>
  <th> Quantity </th>
+ <th> Price </th>
  </tr>
  <tr ng-repeat="item in order.items">
  <td>{{ item.item.id}}</td>
  <td>{{ item.item.name}}</td>
  <td>{{ item.item.price}}</td>
  <td>{{item.quantity}}</td>
+ <td>{{item.item.price*item.quantity}}</td>
+ 
  </tr>
  
- <tr> <td colspan=4> <button ng-click="PayNow( order )"> Pay Now</button> </td>
- <td> Total Price : {{totalPrice()}}</td>
+ <tr> <td colspan=4> <button ng-click="payNow(order)"> Pay Now</button> </td>
+ <td> Total Price : {{totalPrice(order)}}</td>
  </tr>
  </table>
  </div>

@@ -9,22 +9,35 @@ angular.module('myApp').controller('counterController', [ '$routeParams', '$loca
   })
   
 	$scope.selectTable = function( tableNumber ) {
+		$scope.tableOrders = [];
 		for(var i=0;i<$scope.allOrders.length;i++)
 		{
 			if($scope.allOrders[i].tableNumber == tableNumber)
 			{
 				$scope.tableOrders.push($scope.allOrders[i]);
-				console.log($scope.tableOrders);
 			}
 		}
 		
 	}
-	$scope.totalPrice = function(){
+	
+	$scope.totalPrice = function(order){
 		var total=0;
-		for (count=0;count<$scope.tableOrders.length;count++){
-		total += $scope.item[count].price +$scope.item[count].price;
+		for (var count=0;count<order.items.length;count++){
+		total += order.items[count].item.price * order.items[count].quantity;
 		}
 		return total;
 	}
-$scope
+	
+	
+    $scope.payNow = function(order)
+	{
+		order.paid = true;
+		OrderService.orderPaid(order).then(function(paymentDone){
+			alert("Payment Completed");
+		}, function(){
+			alert ( "Payment not Completed");
+		});
+	}
+		
+		
 }]);
