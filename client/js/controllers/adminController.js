@@ -8,7 +8,6 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 	}
 
 	ItemService.getItems().then( function( allItems ){
-
 		$scope.allItems = allItems
 	})
 
@@ -33,7 +32,7 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
 		ItemService.deleteItem(itemId).then(function () {
 
-			var recordToDelete = $scope.allItems.findIndex(x => x.id == itemId);
+			var recordToDelete = $scope.allItems.findIndex(x => x._id == itemId);
 
 			$scope.allItems.splice(recordToDelete, 1);
 

@@ -23,38 +23,24 @@
 		</div>
 		<div class="removeItem">
 	
-			<h3>Remove item</h3>
-			<form name="itemForm">
-	
-				<br> Item ID:
-				<input type="number" ng-model="removeItemId">
-				<br>
-	
-				<button ng-click="removeItem( removeItemId )">Delete item</button>
-				<br>
-				<br>
-			</form>
 		</div>
 	
 		<div class="itemList">
 	
 			<table>
 				<tr>
-					<th>ID</th>
 					<th>Name</th>
 					<th>Price</th>
-					<th></th>
 				</tr>
 	
 				<tr ng-repeat="item in allItems" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 	
-					<td>{{ item.id }}</td>
 					<td>{{ item.name }}</td>
-					<td>{{ item.price }}</td>
+					<td>£{{ item.price }}</td>
 					<td>
 						<span>
 							<a>
-								<button type="button" ng-show="hoverEdit">Delete</button>
+								<button type="button" ng-show="hoverEdit" ng-click="removeItem( item._id )">Delete</button>
 							</a>
 						</span>
 					</td>
