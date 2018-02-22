@@ -49,36 +49,20 @@ app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$s
       SocketService.getSocket().removeAllListeners();
     });
 	
-	var tick = function(){
-		$scope.now = Date.now();
-	}
-	tick();
-	$interval(tick,1000);
-	
-	$scope.isKitchenComplete = function(order)
+	$scope.waitTime = function(placed)
 	{
-		
+		var placedAt = new Date(placed);
+		var current = new Date();
+				
+		var diff = Math.abs(current.getTime() - placedAt.getTime());
+		var hours = Math.floor(diff/(60*60*1000));
+		var mins = ((diff/(60*1000))%60).toFixed(0);
+		var secs = ((diff%60000)/1000).toFixed(0);
+				
+		return ((hours < 10) ? ("0"+hours) : hours) 
+				+ ":" + ((mins < 10) ? ("0"+mins) : mins)
+				+ ":" + ((secs < 10) ? ("0"+secs) : secs);
 	}
+	
+	$interval($scope.waitTime,1000);
 }]);
-
-app.filter("waitTime", function(){
-		return function(placed){
-			var placedAt = new Date(placed);
-			var current = new Date();
-			
-			var diff = Math.abs(current.getTime() - placedAt.getTime());
-			var hours = Math.floor(diff/(60*60*1000));
-			var mins = ((diff/(60*1000))%60).toFixed(0);
-			var secs = ((diff%60000)/1000).toFixed(0);
-
-			return ((hours < 10) ? ("0"+hours) : hours) 
-			+ ":" + ((mins < 10) ? ("0"+mins) : mins)
-			+ ":" + ((secs < 10) ? ("0"+secs) : secs);
-		}
-	})
-
-app.filter("isKitchenComplete",function(){
-	return function(order){
-		return !order.kitchenComplete;
-	}
-})
