@@ -8,7 +8,8 @@ var orderSchema = mongoose.Schema({
 	items: [{ 	item: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' }, 
 				quantity: Number 
 			}],
-	placed: { type: Date, default: Date.now }
+	placed: { type: Date, default: Date.now },
+	kitchenComplete: { type: Boolean, default: false }
 	
 });
 
