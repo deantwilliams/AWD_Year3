@@ -7,10 +7,20 @@ var logger 			= require('morgan');
 var cookieParser 	= require('cookie-parser');
 var bodyParser 		= require('body-parser');
 var session      	= require( 'express-session' );
+var passport = require('passport');
 
 var app 			= express();
 
 app.use( express.static( 'client' ) );
+
+// Configuring Passport
+app.use(session({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Initialize Passport
+var initPassport = require('./passportinit');
+initPassport(passport);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -25,10 +35,16 @@ app.use( session({
 	    saveUninitialized: false
 }));
 
+// Initialize flash
+var flash = require('connect-flash');
+app.use(flash());
+
 var itemRoutes = require( '../routes/itemRoutes.js' );
 var orderRoutes = require( '../routes/orderRoutes.js' );
+var adminRoutes = require( '../routes/adminRoutes.js' )(passport);
 app.use('/api/items', itemRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('*', function(req, res) {
 	res.sendFile( '/index.html', {root: './client'} );
