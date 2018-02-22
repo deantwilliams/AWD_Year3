@@ -90,8 +90,6 @@ exports.updateOrder = function(req,res) {
     });
 }
 
-
-
 exports.getUnpaidOrders = function(req, res) {
 
     Order.find({ 'paid': false })
