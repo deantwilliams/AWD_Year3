@@ -13,7 +13,17 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
 
 	$scope.createItem = function( item ){
-
+		console.log("itemid: " + item.id);
+		
+		// Check whether an item with the same id exists.
+		// If it exists, an new menu item cannot be added 
+		var itemWithId = $scope.allItems.findIndex(x => x.id == item.id);
+		
+		if(itemWithId != -1){
+			// Item with provided id already exists 			
+            alert( "Cannot add item with a duplicate id." );
+		}else{
+			
 		ItemService.createItem( item ).then( function( createdItem ){ 
 
             alert( "Menu item " + createdItem.data.name + " added successfully" );
@@ -23,16 +33,17 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
             alert( "Item not added" );
         })
+		}
 	}
 
 
-	$scope.removeItem = function (itemId) {
+	$scope.removeItem = function (item) {
+		item.deleted = true;
+		console.log(item._id);
 
-		console.log(itemId);
+		ItemService.updateItem(item).then(function () {
 
-		ItemService.deleteItem(itemId).then(function () {
-
-			var recordToDelete = $scope.allItems.findIndex(x => x._id == itemId);
+			var recordToDelete = $scope.allItems.findIndex(x => x._id == item._id);
 
 			$scope.allItems.splice(recordToDelete, 1);
 

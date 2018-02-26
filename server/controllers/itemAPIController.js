@@ -1,5 +1,20 @@
 var Item = require( '../models/itemModel' );
 
+exports.update = function(req,res) {
+	var id = req.params.id;
+	
+	Item.findByIdAndUpdate(id, { $set: req.body }, {new: true}, (err, item) => {  
+
+        if( err ){
+            console.log( "error: " + err );
+            return res.status(500).json({ errors: "Could not delete item" });
+        } 
+
+        res.status( 200 ).json({ message: "Item deleted!", item });
+    });
+}
+
+
 exports.list = function( req, res ){
 
     Item.find({ }, function( err, items ){
