@@ -1,11 +1,10 @@
-<h1>Admin</h1>
+<h2>Admin</h2><br>
 
 <div class="menuControls">
 	
-		<h2>Menu</h2>
 		<div class="addItem">
 	
-			<h3>Add item</h3>
+			<h4>Add item</h4>
 			<form name="addItemForm">
 	
 				Item Name:
@@ -26,23 +25,25 @@
 		</div>
 	
 		<div class="itemList">
+
+					<h4>Menu</h4>
+
 	
-			<table>
+			<table class="table-bordered">
 				<tr>
+					<th>ID</th>
 					<th>Name</th>
 					<th>Price</th>
 				</tr>
 	
 				<tr ng-repeat="item in allItems" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 	
+					<td>{{ item.id }}</td>
 					<td>{{ item.name }}</td>
 					<td>£{{ item.price }}</td>
 					<td>
-						<span>
-							<a>
-								<button type="button" ng-show="hoverEdit" ng-click="removeItem( item )">Delete</button>
-							</a>
-						</span>
+						<button ng-if="!item.deleted" type="button" ng-show="hoverEdit" ng-click="removeItem( item )">Delete</button>
+						<span ng-if="item.deleted">Removed from the menu</span>
 					</td>
 	
 				</tr>

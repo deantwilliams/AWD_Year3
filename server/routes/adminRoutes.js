@@ -8,16 +8,6 @@ module.exports = function (passport) {
   router.delete('/deleteadmin', users.delete)
 
   router.post('/createadmin', users.create);
-
-
-  /* Handle Login POST */
-
-
-    // router.post('/login', passport.authenticate('login', {
-    //   successRedirect: '/admin',
-    //   failureRedirect: '/login',
-    //   failureFlash: true
-    // }));
     
   router.post( '/login', function( req, res, next ){
 
@@ -53,20 +43,6 @@ module.exports = function (passport) {
       })( req, res, next );
   });
 
-  // router.post('/login', function (req, res, next) {
-  //   passport.authenticate('login', function (err, user, info) {
-  //     if (err) { return next(err); }
-  //     // Redirect if it fails
-  //     if (!user) { return res.redirect('/login'); }
-  //     req.logIn(user, function (err) {
-  //       if (err) { return next(err); }
-  //       // Redirect if it succeeds
-  //       return res.redirect('/' + user.username);
-  //     });
-  //   })(req, res, next);
-  // });
-
-  /* Handle Logout */
   router.get('/signout', function (req, res) {
     req.logout();
     res.redirect('/');
@@ -84,15 +60,3 @@ module.exports = function (passport) {
 
   return router;
 }
-
-
-// var isAuthenticated = function (req, res, next) {
-//   console.log("isAuthenticated");
-//   // if user is authenticated in the session, call the next() to call the next request handler 
-//   // Passport adds this method to request object. A middleware is allowed to add properties to
-//   // request and response objects
-//   if (req.isAuthenticated())
-//     return next();
-//   // if the user is not authenticated then redirect him to the login page
-//   res.redirect('/');
-// }

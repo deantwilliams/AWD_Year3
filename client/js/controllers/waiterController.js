@@ -1,4 +1,4 @@
-angular.module('myApp').controller('waiterController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', 'SocketService', function( $routeParams, $location, $route, $scope, ItemService, OrderService, SocketService ){
+angular.module('myApp').controller('waiterController', [ '$scope', 'ItemService', 'OrderService', 'SocketService', function( $scope, ItemService, OrderService, SocketService ){
 
 	$scope.order = {
 
@@ -56,17 +56,26 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 
 	$scope.addItemToOrder = function( selectedItem ){
 
-		//if selectedItem is already in the order
-
-		if( false ){
-
-			//prompt user to edit quantity instead
-
+		if(!selectedItem){
+			alert( "Please select a menu item to add to the order" )
 		}else{
-			var itemToAdd = { item: selectedItem, quantity: 1 }
-			$scope.order.items.push( itemToAdd );
+
+
+			var index = $scope.order.items.findIndex(x => x.item._id == selectedItem._id)
+
+			if( index != -1 ){
+
+				$scope.order.items[index].quantity += 1
+
+			}else{
+
+				var itemToAdd = { item: selectedItem, quantity: 1 }
+				$scope.order.items.push( itemToAdd );
+			}
+
 		}
 
+		
 	}
 
 	$scope.removeItemFromOrder = function( selectedItem ){
@@ -77,15 +86,24 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 
 	$scope.createOrder = function( order ){
 
-		OrderService.createOrder( order ).then( function( createdOrder ){ 
+		if( order.items.length > 0){
 
-			$scope.resetForm();
-            alert( "Order sent to the kitchen" );
+			OrderService.createOrder( order ).then( function( createdOrder ){ 
 
-        }, function(){
+				$scope.resetForm();
+	            alert( "Order sent to the kitchen" );
 
-            alert( "Order not sent to the kitchen" );
-        })
+	        }, function(){
+
+	            alert( "Order not sent to the kitchen" );
+	        })
+
+		}else{
+
+			alert("You can't place an order with no food or drinks selected")
+		}
+
+		
 	}
 
 	$scope.resetForm = function(){
@@ -99,6 +117,23 @@ angular.module('myApp').controller('waiterController', [ '$routeParams', '$locat
 		$scope.showOrderForm = false;
 
 	}
+
+	SocketService.on('item.created', function( item ){
+		$scope.$applyAsync( function(){
+
+			$scope.allItems.push( item ); 
+
+        });
+    });
+
+    SocketService.on('item.updated', function( item ){
+		$scope.$applyAsync( function(){
+
+			var index = $scope.allItems.findIndex(x => x._id == item._id)
+			$scope.allItems[index] = item
+
+        });
+    });
 
 	SocketService.on('order.added', function( order ){
 		OrderService.getOrder(order._id).then(function( newOrder ){

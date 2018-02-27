@@ -1,4 +1,4 @@
-angular.module('myApp').controller('counterController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', function( $routeParams, $location, $route, $scope, ItemService, OrderService ){
+angular.module('myApp').controller('counterController', [ '$scope', 'ItemService', 'OrderService', 'SocketService', function( $scope, ItemService, OrderService, SocketService ){
 
 	$scope.title = "Counter"
     $scope.tableOrders = [];
@@ -38,6 +38,18 @@ angular.module('myApp').controller('counterController', [ '$routeParams', '$loca
 			alert ( "Payment not Completed");
 		});
 	}
+
+	SocketService.on('order.added', function( order ){
+		OrderService.getOrder(order._id).then(function(newOrder){
+			$scope.$applyAsync( function(){
+				$scope.allOrders.push( newOrder ); 
+            });
+		})
+    });
+   
+    $scope.$on( '$destroy', function( event ){
+      SocketService.getSocket().removeAllListeners();
+    });
 		
 		
 }]);

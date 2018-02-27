@@ -1,6 +1,6 @@
 var app = angular.module('myApp');
 
-app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$scope', '$interval', 'ItemService', 'OrderService', 'SocketService', function( $routeParams, $location, $route, $scope, $interval, ItemService, OrderService, SocketService){
+app.controller('kitchenController', [ '$scope', '$interval', 'ItemService', 'OrderService', 'SocketService', function( $scope, $interval, ItemService, OrderService, SocketService){
 
 	$scope.title = "Kitchen"
 	$scope.allOrders = [];

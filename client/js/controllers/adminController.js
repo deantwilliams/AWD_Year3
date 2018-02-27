@@ -1,4 +1,4 @@
-angular.module('myApp').controller('adminController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', function( $routeParams, $location, $route, $scope, ItemService, OrderService ){
+angular.module('myApp').controller('adminController', [ '$scope', 'ItemService', 'OrderService', function( $scope, ItemService, OrderService ){
 
 	$scope.item = {
 
@@ -13,7 +13,6 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
 
 	$scope.createItem = function( item ){
-		console.log("itemid: " + item.id);
 		
 		// Check whether an item with the same id exists.
 		// If it exists, an new menu item cannot be added 
@@ -38,24 +37,15 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
 
 	$scope.removeItem = function (item) {
+
 		item.deleted = true;
-		console.log(item._id);
-
-		ItemService.updateItem(item).then(function () {
-
-			var recordToDelete = $scope.allItems.findIndex(x => x._id == item._id);
-
-			$scope.allItems.splice(recordToDelete, 1);
-
-		}, function () {
-
-		})
+		ItemService.updateItem(item)
 	}
 
 
-	function findArrayIndexOfItemId(itemId) {
-		return $scope.allItems.id == itemId;
-	}
+	// function findArrayIndexOfItemId(itemId) {
+	// 	return $scope.allItems.id == itemId;
+	// }
 
 	$scope.hoverIn = function () {
 		this.hoverEdit = true;
@@ -67,7 +57,6 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
 	$scope.logOut = function () {
 		UserService.logOut();
-		console.log("loggedIn admin: " + localStorage.isLoggedIn);
 	}
 
 

@@ -12,10 +12,6 @@ myApp.config(function ($routeProvider, $locationProvider) {
         .when('/waiter', { templateUrl: 'views/waiter.html', controller: 'waiterController' })
         .when('/login', { templateUrl: 'views/login.html', controller: 'loginController' })
 
-        // viewing individual items and orders
-        .when('/orders/:id', { templateUrl: 'views/order.html', controller: 'counterController' })
-        .when('/items/:id', { templateUrl: 'views/item.html', controller: 'adminController' })
-
         .otherwise({ templateUrl: 'views/404.html' });
 
     $locationProvider.html5Mode({ enabled: true, rewriteLinks: false });

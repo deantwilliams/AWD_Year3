@@ -35,23 +35,6 @@ exports.create = function( req, res ){
     });
 };
 
-exports.delete = function( req, res ){
-
-    var id = req.params.id;
-
-    Order.findByIdAndRemove(id, (err, order) => {  
-
-        if( err ){
-            console.log( "error: " + err );
-            return res.status(500).json({ errors: "Could not delete order" });
-        } 
-
-        console.log("order deleted: " + order);
-        res.status( 200 ).json( order );
-    });
-
-};
-
 
 exports.lookupOrder = function(req, res) {
 
@@ -118,7 +101,7 @@ exports.orderPaid = function(req,res) {
             return res.status(500).json({ errors: "Could not pay for order" });
         } 
 
-		var socketio = req.app.get('socketio');
+        var socketio = req.app.get('socketio');
         socketio.sockets.emit('order.paid', order);
         res.status( 200 ).json({ message: "Payment Complete!", order });
     });

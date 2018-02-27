@@ -5,19 +5,13 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
       getOrder: getOrder,
       getUnpaidOrders: getUnpaidOrders,
       createOrder: createOrder,
-      deleteOrder: deleteOrder,
       updateOrder: updateOrder,
-      completeOrder: completeOrder,
-	  orderPaid: orderPaid
+      orderPaid: orderPaid
     });
 
 
     function createOrder( order ){
       return $http({ method: 'POST', url: '/api/orders', data: order });
-    }
-
-    function deleteOrder( ID ){
-      return $http({ method: 'DELETE', url: '/api/orders/'+ID });
     }
 
 
@@ -92,10 +86,6 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
 
 	function updateOrder(order){
 		return $http({ method: 'PATCH', url: '/api/orders/'+order._id, data: order });
-	}
-	
-	function completeOrder(order){
-		return $http({ method: 'PATCH', url: '/api/order/'+order._id, data: 1 });
 	}
 	
 	function orderPaid(order){

@@ -7,10 +7,13 @@ exports.update = function(req,res) {
 
         if( err ){
             console.log( "error: " + err );
-            return res.status(500).json({ errors: "Could not delete item" });
+            return res.status(500).json({ errors: "Could not mark item as deleted" });
         } 
 
-        res.status( 200 ).json({ message: "Item deleted!", item });
+        var socketio = req.app.get('socketio');
+        socketio.sockets.emit('item.updated', item);
+
+        res.status( 200 ).json({ message: "Item taken off the menu!", item });
     });
 }
 
@@ -48,24 +51,6 @@ exports.create = function( req, res ){
 
     });
 };
-
-exports.delete = function( req, res ){
-
-    var id = req.params.id;
-
-    Item.findByIdAndRemove(id, (err, item) => {  
-
-        if( err ){
-            console.log( "error: " + err );
-            return res.status(500).json({ errors: "Could not delete item" });
-        } 
-
-        console.log("item deleted: " + item);
-        res.status( 200 ).json( item );
-    });
-
-};
-
 
 exports.lookupItem = function(req, res, next) {
 
