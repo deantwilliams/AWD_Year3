@@ -4,6 +4,7 @@ angular.module('myApp').factory('UserService', ['$q', '$timeout', '$http', funct
 
 	return ({
 		login: login,
+		logOut: logOut,
 		createAdminAccount: createAdminAccount,
 		deleteAdminAccount: deleteAdminAccount,
 		isLoggedIn: isLoggedIn,
@@ -59,5 +60,8 @@ angular.module('myApp').factory('UserService', ['$q', '$timeout', '$http', funct
 	function deleteAdminAccount(){
 		return $http({ method: 'DELETE', url: 'api/admin/deleteadmin'});
 	}
-
+	
+	function logOut(){
+		return $http({ method: 'GET', url: 'api/admin/signout'});
+	}
 }]);

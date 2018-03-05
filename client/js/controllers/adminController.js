@@ -1,4 +1,4 @@
-angular.module('myApp').controller('adminController', [ '$scope', 'ItemService', 'OrderService', function( $scope, ItemService, OrderService ){
+angular.module('myApp').controller('adminController', [ '$scope', 'ItemService', 'OrderService', 'UserService', function( $scope, ItemService, OrderService, UserService ){
 
 	$scope.item = {
 
@@ -42,21 +42,22 @@ angular.module('myApp').controller('adminController', [ '$scope', 'ItemService',
 		ItemService.updateItem(item)
 	}
 
-
-	// function findArrayIndexOfItemId(itemId) {
-	// 	return $scope.allItems.id == itemId;
-	// }
-
 	$scope.hoverIn = function () {
 		this.hoverEdit = true;
-	};
+	}
 
 	$scope.hoverOut = function () {
 		this.hoverEdit = false;
-	};
+	}
 
 	$scope.logOut = function () {
-		UserService.logOut();
+		UserService.logOut().then(function(  ){ 
+			
+
+        }, function(){
+
+            alert( "Item not added" );
+        })
 	}
 
 
