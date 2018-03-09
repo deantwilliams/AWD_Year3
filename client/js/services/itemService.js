@@ -1,4 +1,4 @@
-angular.module( 'myApp' ).factory( 'ItemService', [ '$q', '$timeout', '$http', function( $q, $timeout, $http ){
+angular.module( 'myApp' ).factory( 'ItemService', function( $q, $timeout, $http ){
 
     return ({
       getItems: getItems,
@@ -39,4 +39,4 @@ angular.module( 'myApp' ).factory( 'ItemService', [ '$q', '$timeout', '$http', f
     }
 
 
-}]);
+});

@@ -1,4 +1,4 @@
-angular.module('myApp').controller('waiterController', [ '$scope', 'ItemService', 'OrderService', 'SocketService', function( $scope, ItemService, OrderService, SocketService ){
+angular.module('myApp').controller('waiterController', function( $scope, ItemService, OrderService, SocketService ){
 
 	$scope.order = {
 
@@ -164,4 +164,4 @@ angular.module('myApp').controller('waiterController', [ '$scope', 'ItemService'
 
 
 
-}]);
+});

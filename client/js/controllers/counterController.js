@@ -1,4 +1,4 @@
-angular.module('myApp').controller('counterController', [ '$scope', 'ItemService', 'OrderService', 'SocketService', function( $scope, ItemService, OrderService, SocketService ){
+angular.module('myApp').controller('counterController', function( $scope, ItemService, OrderService, SocketService ){
 
 	$scope.title = "Counter"
     $scope.tableOrders = [];
@@ -52,4 +52,4 @@ angular.module('myApp').controller('counterController', [ '$scope', 'ItemService
     });
 		
 		
-}]);
+});

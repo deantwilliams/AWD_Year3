@@ -1,6 +1,6 @@
 var app = angular.module('myApp');
 
-app.controller('kitchenController', [ '$scope', '$interval', 'ItemService', 'OrderService', 'SocketService', function( $scope, $interval, ItemService, OrderService, SocketService){
+app.controller('kitchenController', function( $scope, $interval, ItemService, OrderService, SocketService){
 
 	$scope.title = "Kitchen"
 	$scope.allOrders = [];
@@ -65,4 +65,4 @@ app.controller('kitchenController', [ '$scope', '$interval', 'ItemService', 'Ord
 	}
 	
 	$interval($scope.waitTime,1000);
-}]);
+});

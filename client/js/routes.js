@@ -1,6 +1,4 @@
-var myApp = angular.module("myApp", ['ngRoute']);
-
-myApp.config(function ($routeProvider, $locationProvider) {
+angular.module("myApp").config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
 
@@ -17,7 +15,7 @@ myApp.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode({ enabled: true, rewriteLinks: false });
 });
 
-myApp.run( function( $rootScope, $location, $route, UserService ){
+angular.module("myApp").run( function( $rootScope, $location, $route, UserService ){
 
     $rootScope.location = $location
 

@@ -1,4 +1,4 @@
-angular.module('myApp').controller('adminController', [ '$scope', 'ItemService', 'OrderService', 'UserService', function( $scope, ItemService, OrderService, UserService ){
+angular.module('myApp').controller('adminController', function( $scope, ItemService, OrderService, UserService ){
 
 	$scope.item = {
 
@@ -61,4 +61,4 @@ angular.module('myApp').controller('adminController', [ '$scope', 'ItemService',
 	}
 
 
-}]);
+});

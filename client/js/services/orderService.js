@@ -1,4 +1,4 @@
-angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', function( $q, $timeout, $http ){
+angular.module( 'myApp' ).factory( 'OrderService', function( $q, $timeout, $http ){
 
     return ({
       getOrders: getOrders,
@@ -91,4 +91,4 @@ angular.module( 'myApp' ).factory( 'OrderService', [ '$q', '$timeout', '$http', 
 	function orderPaid(order){
 		return $http({ method: 'PATCH', url: '/api/orders/'+order._id+'/paid', data: order });
 	}
-}]);
+});

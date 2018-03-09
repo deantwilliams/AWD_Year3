@@ -1,6 +1,6 @@
 var app = angular.module('myApp');
 
-app.controller('loginController', [ '$location', '$scope', '$location', '$interval', 'ItemService', 'OrderService', 'SocketService', 'UserService', function ( $location, $scope, $location, $interval, ItemService, OrderService, SocketService, UserService) {
+app.controller('loginController', function ( $location, $scope, $location, $interval, ItemService, OrderService, SocketService, UserService) {
 
 	$scope.login = function (user) {
 		
@@ -24,4 +24,4 @@ app.controller('loginController', [ '$location', '$scope', '$location', '$interv
 		UserService.deleteAdminAccount();
 	}
 
-}]);
+});

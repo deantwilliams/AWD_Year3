@@ -1,4 +1,4 @@
-angular.module('myApp').factory('UserService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
+angular.module('myApp').factory('UserService', function ($q, $timeout, $http) {
 
 	var user = null;
 
@@ -64,4 +64,4 @@ angular.module('myApp').factory('UserService', ['$q', '$timeout', '$http', funct
 	function logOut(){
 		return $http({ method: 'GET', url: 'api/admin/signout'});
 	}
-}]);
+});
