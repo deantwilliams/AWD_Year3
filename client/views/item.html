@@ -1,6 +1,7 @@
 <div ng-if="!item" class="alert alert-danger">This item does not exist</div>
 
-<div ng-show="error.message" class="alert alert-danger">{{error.message}}</div>
+<div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
+	
 
 <div class="container-fluid content" ng-if="item">
 
@@ -23,7 +24,7 @@
 
                         <label for="itemName">Price</label>
 
-                        <input type="number" class="form-control" id="itemPrice" ng-model="item.price">
+                        <input type="number" class="form-control" id="itemPrice" ng-model="item.price" min="0.01" step="0.01">
 
                     </div>
 
