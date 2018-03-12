@@ -10,7 +10,7 @@ angular.module("myApp").config(function ($routeProvider, $locationProvider) {
         .when('/waiter', { templateUrl: 'views/waiter.html', controller: 'waiterController' })
         .when('/login', { templateUrl: 'views/login.html', controller: 'loginController' })
 
-        .when('/items/:id', { templateUrl: 'views/item.html', controller: 'itemController' })
+        .when('/items/:id', { templateUrl: 'views/item.html', controller: 'itemController', access: { restricted: true } })
 
 
         .otherwise({ templateUrl: 'views/404.html' });
