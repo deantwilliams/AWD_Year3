@@ -57,3 +57,7 @@ tr.kitchenItemStrike td:before{
 #addItemForm{
 	text-align: left !important;
 }
+
+body{
+	background-image: url("/images/greyzz_@2X.png");
+}

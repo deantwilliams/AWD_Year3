@@ -20,24 +20,23 @@ angular.module('myApp').controller('adminController', function( $scope, ItemServ
 		
 		if(itemWithId != -1){
 			// Item with provided id already exists 			
-            alert( "Cannot add item with a duplicate id." );
+           $scope.errorMessage = "Cannot add item with a duplicate id.";
 		}else{
 			
 		ItemService.createItem( item ).then( function( createdItem ){ 
 
-            alert( "Menu item " + createdItem.data.name + " added successfully" );
+            //alert( "Menu item " + createdItem.data.name + " added successfully" );
             $scope.allItems.push( createdItem.data )
 
         }, function(){
 
-            alert( "Item not added" );
+         $scope.errorMessage = "Item not added";
         })
 		}
 	}
 
 
 	$scope.removeItem = function (item) {
-
 		item.deleted = true;
 		ItemService.updateItem(item)
 	}
