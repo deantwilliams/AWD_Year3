@@ -1,4 +1,4 @@
-angular.module('myApp').controller('adminController', function( $scope, ItemService, OrderService, UserService ){
+angular.module('myApp').controller('adminController', function( $scope, ItemService, OrderService, UserService, $location ){
 
 	$scope.item = {
 
@@ -51,12 +51,11 @@ angular.module('myApp').controller('adminController', function( $scope, ItemServ
 	}
 
 	$scope.logOut = function () {
-		UserService.logOut().then(function(  ){ 
-			
-
+						
+		UserService.logOut().then(function(){ 
+			$location.path("/login");			
         }, function(){
-
-            alert( "Item not added" );
+            alert( "Not logged out" );
         })
 	}
 

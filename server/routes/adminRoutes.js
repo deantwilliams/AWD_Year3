@@ -45,7 +45,9 @@ module.exports = function (passport) {
 
   router.get('/signout', function (req, res) {
     req.logout();
-	res.status( 200 );
+	res.status( 200 ).json({
+		loggedOut: true
+	});
   });
 
 

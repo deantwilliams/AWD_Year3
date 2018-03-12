@@ -61,7 +61,20 @@ angular.module('myApp').factory('UserService', function ($q, $timeout, $http) {
 		return $http({ method: 'DELETE', url: 'api/admin/deleteadmin'});
 	}
 	
-	function logOut(){
-		return $http({ method: 'GET', url: 'api/admin/signout'});
+	function logOut(){		
+		
+		var deferred = $q.defer();
+		
+		console.log("logging out");
+		
+		
+		$http.get('api/admin/signout').then(
+		function successCallback (res){
+			user = false;
+			deferred.resolve();
+		}, function errorCallback(res){
+			deferred.reject();
+		})
+		return deferred.promise;
 	}
 });
