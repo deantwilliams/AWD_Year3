@@ -2,7 +2,7 @@ angular.module("myApp").config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
 
-        .when('/', { templateUrl: 'views/home.html' })
+        .when('/', { templateUrl: 'views/waiter.html' })
 
         .when('/admin', { templateUrl: 'views/admin.html', controller: 'adminController', access: { restricted: true } })
         .when('/kitchen', { templateUrl: 'views/kitchen.html', controller: 'kitchenController' })

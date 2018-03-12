@@ -53,3 +53,7 @@ tr.kitchenItemStrike td:before{
 
 	width:50px;
 }
+
+#addItemForm{
+	text-align: left !important;
+}
