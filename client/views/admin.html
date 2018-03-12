@@ -41,9 +41,9 @@
 	
 					<td>{{ item.id }}</td>
 					<td>{{ item.name }}</td>
-					<td>£{{ item.price }}</td>
+					<td>£{{ item.price.toFixed(2) }}</td>
 					<td>
-						<button ng-if="!item.deleted" type="button" ng-show="hoverEdit" ng-click="removeItem( item )">Delete</button>
+						<button ng-if="!item.deleted" type="button" ng-click="removeItem( item )">Delete</button>
 						<span ng-if="item.deleted">Removed from the menu</span>
 					</td>
 	
