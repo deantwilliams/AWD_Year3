@@ -58,5 +58,10 @@ angular.module('myApp').controller('adminController', function( $scope, ItemServ
         })
 	}
 
+	$scope.editItem = function ( itemId ) {
+		
+		$location.path("/items/" + itemId);
+		
+	}
 
 });

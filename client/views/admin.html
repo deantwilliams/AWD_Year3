@@ -46,6 +46,9 @@
 						<button ng-if="!item.deleted" type="button" ng-show="hoverEdit" ng-click="removeItem( item )">Delete</button>
 						<span ng-if="item.deleted">Removed from the menu</span>
 					</td>
+					<td>
+						<button type="button" ng-click="editItem( item.id )">Edit</button>
+					</td>
 	
 				</tr>
 	
