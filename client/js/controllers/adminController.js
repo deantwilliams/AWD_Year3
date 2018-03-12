@@ -41,14 +41,6 @@ angular.module('myApp').controller('adminController', function( $scope, ItemServ
 		ItemService.updateItem(item)
 	}
 
-	$scope.hoverIn = function () {
-		this.hoverEdit = true;
-	}
-
-	$scope.hoverOut = function () {
-		this.hoverEdit = false;
-	}
-
 	$scope.logOut = function () {
 						
 		UserService.logOut().then(function(){ 

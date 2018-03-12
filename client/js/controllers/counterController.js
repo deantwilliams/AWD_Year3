@@ -9,6 +9,7 @@ angular.module('myApp').controller('counterController', function( $scope, ItemSe
   })
   
 	$scope.selectTable = function( tableNumber ) {
+		$scope.aTableIsSelected=true
 		$scope.tableOrders = [];
 		for(var i=0;i<$scope.allOrders.length;i++)
 		{

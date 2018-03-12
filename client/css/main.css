@@ -48,7 +48,6 @@ tr.kitchenItemStrike td:before{
     width: 100%;
 }
 
-
 .quantity{
 
 	width:50px;
@@ -60,4 +59,21 @@ tr.kitchenItemStrike td:before{
 
 body{
 	background-image: url("/images/greyzz_@2X.png");
+}
+
+button{
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: #ccc;
+	background-color: white;
+}
+
+
+button:hover{
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: #ccc;
+	background-color: #fff2f4;
 }
