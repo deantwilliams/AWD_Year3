@@ -64,10 +64,7 @@ angular.module('myApp').factory('UserService', function ($q, $timeout, $http) {
 	function logOut(){		
 		
 		var deferred = $q.defer();
-		
-		console.log("logging out");
-		
-		
+				
 		$http.get('api/admin/signout').then(
 		function successCallback (res){
 			user = false;

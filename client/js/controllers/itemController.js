@@ -27,7 +27,7 @@ angular.module('myApp').controller('itemController', function( $scope, $routePar
 		
 		console.log("id: " + itemId);
 		
-		if(itemWithId != -1){
+		if(itemWithId != -1 && itemId != $scope.item.id){
 			// Item with provided id already exists 			
            $scope.errorMessage = "This ID is already in use, please use a different one.";
 		}else{
