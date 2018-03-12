@@ -4,7 +4,7 @@
 		<div ng-repeat="order in allOrders | filter:{ kitchenComplete: 'false'} | orderBy:'tableNumber' ">
 			<table class="kitchen table-bordered">
 				<tr><th colspan=4>Table {{ order.tableNumber }} Order</th></tr>
-				<tr><td colspan=4>Wait Time: <strong>{{waitTime(order.placed)}}</strong> </td><input</tr>
+				<tr><td colspan=4>Wait Time: <strong>{{waitTime(order.placed)}}</strong> </td></tr>
 				<tr><th>ID</th><th>Name</th><th>Quantity</th><th></th></tr>
 				<tr id="{{order._id}}/{{order.items.indexOf(item)}}" class="" ng-repeat="item in order.items">
 					<td>{{ item.item.id }}</td>
