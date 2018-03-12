@@ -52,11 +52,11 @@ exports.create = function( req, res ){
     });
 };
 
-exports.lookupItem = function(req, res, next) {
+exports.lookupItem = function(req, res) {
 
     var id = req.params.id;
 
-    Item.findOne({ '_id': id }, function( err, item ){
+    Item.findOne({ 'id': id }, function( err, item ){
 
         if( err ){  
             console.log( err ); 
@@ -68,8 +68,7 @@ exports.lookupItem = function(req, res, next) {
             return res.status(404).json({ errors: "No such item" });
         } 
         
-        req.item = item;
-        next();
+        res.json(item);
     });
   
 }

@@ -10,6 +10,9 @@ angular.module("myApp").config(function ($routeProvider, $locationProvider) {
         .when('/waiter', { templateUrl: 'views/waiter.html', controller: 'waiterController' })
         .when('/login', { templateUrl: 'views/login.html', controller: 'loginController' })
 
+        .when('/items/:id', { templateUrl: 'views/item.html', controller: 'itemController' })
+
+
         .otherwise({ templateUrl: 'views/404.html' });
 
     $locationProvider.html5Mode({ enabled: true, rewriteLinks: false });

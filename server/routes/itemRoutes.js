@@ -4,7 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', items.list );
+router.get('/:id', items.lookupItem );
 router.post('/', items.create );
-router.patch('/:id',items.update);
+router.patch('/:id', items.update);
 
 module.exports = router;
