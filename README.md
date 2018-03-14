@@ -9,6 +9,8 @@ To view site:
 
 Notes:
 
-Database access requires port 25288 is open 
+Database access requires port 25288 is open
+
+
 Admin username: admin
 Admin password: adminpass8888
