@@ -2,19 +2,18 @@ var app = angular.module('myApp');
 
 app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$scope', '$interval', 'ItemService', 'OrderService', 'SocketService', function( $routeParams, $location, $route, $scope, $interval, ItemService, OrderService, SocketService){
 
-	$scope.title = "Kitchen"
+	$scope.title = "Kitchen";
 	$scope.allOrders = [];
+	$scope.noOfOrders = 0;
 
 	OrderService.getOrders().then(function (allOrders){
 		if(allOrders == null || allOrders.length == 0)
 		{
-			$scope.showOrdersKitchen = false;
-			$scope.hideOrdersKitchen = true;
+			$scope.noOfOrders = 0
 		}
 		else
 		{
-			$scope.showOrdersKitchen = true;
-			$scope.hideOrdersKitchen = false;
+			$scope.orderStatus(allOrders);
 			$scope.allOrders = allOrders;
 		}
 	})
@@ -31,8 +30,8 @@ app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$s
 		order.kitchenComplete = true;
 		OrderService.updateOrder(order).then(function(orderDone){
 			alert("Order updated");
+			$scope.orderStatus($scope.allOrders);
 		}, function(){
-
             alert( "Order not updated" );
         });
 	}
@@ -40,7 +39,8 @@ app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$s
 	SocketService.on('order.added', function( order ){
 			OrderService.getOrder(order._id).then(function(newOrder){
 				$scope.$applyAsync( function(){
-					$scope.allOrders.push( newOrder ); 
+					$scope.allOrders.push( newOrder );
+					$scope.orderStatus($scope.allOrders);
                 });
 			})
         });
@@ -48,6 +48,19 @@ app.controller('kitchenController', [ '$routeParams', '$location', '$route', '$s
     $scope.$on( '$destroy', function( event ){
       SocketService.getSocket().removeAllListeners();
     });
+	
+	$scope.orderStatus = function(allOrders)
+	{
+		$scope.noOfOrders = 0;
+		console.log(allOrders);
+		for(var i=0;i<allOrders.length;i++)
+		{
+			if(allOrders[i].kitchenComplete == false)
+			{
+				$scope.noOfOrders+=1;
+			}
+		}
+	};
 	
 	$scope.waitTime = function(placed)
 	{

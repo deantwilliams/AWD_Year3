@@ -1,6 +1,7 @@
 <h2>Kitchen</h2>
 <div id="kitchenDiv">
-	<div id="orders" ng-if="showOrdersKitchen">
+	<h3>Number of orders: {{noOfOrders}}</h3>
+	<div id="orders">
 		<div ng-repeat="order in allOrders">
 			<table class="kitchen" ng-if="!order.kitchenComplete">
 				<tr><th colspan=4>Table {{ order.tableNumber }} Order</th></tr>
@@ -16,9 +17,6 @@
 			</table>
 			<br/>
 		</div>
-	</div>
-	<div id="noOrders" ng-if="hideOrdersKitchen">
-		<p>No orders</p>
 	</div>
 </div><!-- end kitchenDiv-->
 
