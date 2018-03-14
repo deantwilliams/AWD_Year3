@@ -24,7 +24,7 @@
 			<h3>Items</h3>
 			<table class="kitchen table-bordered">
 				<tr><th>ID</th><th>Name</th><th>Quantity</th></tr>
-				<tr ng-repeat="item in allItems">
+				<tr ng-repeat="item in allItems | orderBy: 'id'">
 					<td>{{item.id}}</td>
 					<td>{{item.name}}</td>
 					<td>{{item.quantity}}</td>
