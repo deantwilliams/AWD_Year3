@@ -1,25 +1,45 @@
 .content {
-	padding: 50px 50px;
+
+	padding: 50px 3%;
 	text-align: center;
+	overflow-x: hidden;
 }
 
-table tr td, table tr th{
-	padding:40px;
-	text-align: left;
+table{
+
+	min-width: 320px;
+    margin-left:auto; 
+    margin-right:auto;
 }
 
-.kitchen tr td, table tr th, .table{
-	border-collapse: collapse;
+table tr td, table tr th {
+
+	padding: 5px;
+}
+
+.restaurantTable{
+
 	border-style: solid;
 	border-radius: 5px;
 	border-width: 1px;
-	padding: 5px;
-	margin:5px;
-	text-align: center;
-	position: relative;
+	padding: 2px;
+	margin: 2px;
+	height:30px;
 }
 
+.disabledTable {
+
+    color: #ccc;
+    pointer-events:none;
+}
+
+.kitchen tr td{
+
+	position: relative;
+ }
+
 tr.kitchenItemStrike td:before{
+
 	content: " ";
     position: absolute;
     top: 50%;
@@ -28,8 +48,32 @@ tr.kitchenItemStrike td:before{
     width: 100%;
 }
 
-.disabledTable {
-    color: #ccc;
-    pointer-events:none;
+.quantity{
 
+	width:50px;
+}
+
+#addItemForm{
+	text-align: left !important;
+}
+
+body{
+	background-image: url("/images/greyzz_@2X.png");
+}
+
+button{
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: #ccc;
+	background-color: white;
+}
+
+
+button:hover{
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: #ccc;
+	background-color: #fff2f4;
 }

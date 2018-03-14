@@ -3,47 +3,47 @@
 <div id="tables" ng-if="tablesChecked">
 
 	<div class="row">
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(1)" ng-class="{ disabledTable: !tableAvailable[1] }">
-				<div class="table">Table 1 <span ng-show="!tableAvailable[1]">[Taken]</span></div>
+				<div class="restaurantTable">Table 1 <span ng-show="!tableAvailable[1]">[Taken]</span></div>
 			</a>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(2)" ng-class="{ disabledTable: !tableAvailable[2] }">
-				<div class="table">Table 2 <span ng-show="!tableAvailable[2]">[Taken]</span></div>
+				<div class="restaurantTable">Table 2 <span ng-show="!tableAvailable[2]">[Taken]</span></div>
 			</a>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(3)" ng-class="{ disabledTable: !tableAvailable[3] }">
-				<div class="table">Table 3 <span ng-show="!tableAvailable[3]">[Taken]</span></div>
+				<div class="restaurantTable">Table 3 <span ng-show="!tableAvailable[3]">[Taken]</span></div>
 			</a>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(4)" ng-class="{ disabledTable: !tableAvailable[4] }">
-				<div class="table">Table 4 <span ng-show="!tableAvailable[4]">[Taken]</span></div>
+				<div class="restaurantTable">Table 4 <span ng-show="!tableAvailable[4]">[Taken]</span></div>
 			</a>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(5)" ng-class="{ disabledTable: !tableAvailable[5] }">
-				<div class="table">Table 5 <span ng-show="!tableAvailable[5]">[Taken]</span></div>
+				<div class="restaurantTable">Table 5 <span ng-show="!tableAvailable[5]">[Taken]</span></div>
 			</a>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(6)" ng-class="{ disabledTable: !tableAvailable[6] }">
-				<div class="table">Table 6 <span ng-show="!tableAvailable[6]">[Taken]</span></div>
+				<div class="restaurantTable">Table 6 <span ng-show="!tableAvailable[6]">[Taken]</span></div>
 			</a>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(7)" ng-class="{ disabledTable: !tableAvailable[7] }">
-				<div class="table">Table 7 <span ng-show="!tableAvailable[7]">[Taken]</span></div>
+				<div class="restaurantTable">Table 7 <span ng-show="!tableAvailable[7]">[Taken]</span></div>
 			</a>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-6 col-sm-3">
 			<a ng-click="selectTable(8)" ng-class="{ disabledTable: !tableAvailable[8] }">
-				<div class="table">Table 8 <span ng-show="!tableAvailable[8]">[Taken]</span></div>
+				<div class="restaurantTable">Table 8 <span ng-show="!tableAvailable[8]">[Taken]</span></div>
 			</a>
 		</div>
 	</div>
@@ -51,23 +51,22 @@
 </div><!-- end tables -->
 
 <div id="orderFormDiv" ng-if="showOrderForm">
-	<h3>Creating order for table: {{order.tableNumber}}</h3>
+	<h4>Table: {{order.tableNumber}}</h4>
 
 	<form id="orderForm">
 
-		Number of people seated: <input type="number" ng-model="order.numberOfPeople" /><br>
-
-		<select name="itemSelect" id="itemSelect" ng-model="selectedItem" ng-options="item as item.name for item in allItems"> 
+		<select name="itemSelect" id="itemSelect" ng-model="selectedItem" 
+		ng-options="item as item.name for item in allItems | filter:{ deleted: 'false'}"> 
             <option value="">Select an item</option>
         </select>
-        <button ng-click="addItemToOrder( selectedItem )">Add item to order</button>
+        <button ng-click="addItemToOrder( selectedItem )">Add</button>
 
         <br><br>
 
-        <table>
+        <table ng-if="order.items.length > 0" class="table-bordered">
 			<tr>
 				<th>ID</th>
-				<th>Name</th>
+				<th>Item</th>
 				<th>Price</th>
 				<th>Quantity</th>
 				<th>Remove</th>
@@ -76,10 +75,12 @@
 				<td>{{ item.item.id }}</td>
 				<td>{{ item.item.name }}</td>
 				<td>£{{ item.item.price }}</td>
-				<td><input type="number" ng-model="item.quantity" min="1"/></td>
+				<td><input type="number" ng-model="item.quantity" min="1" class="quantity"/></td>
 				<td><button ng-click="removeItemFromOrder( item )">Remove</button></td>
 			</tr>
 		</table>
+
+		<span ng-if="order.items.length == 0">Order empty</span>
 		<br><br>
 
 		<button ng-click="resetForm( )">Cancel order</button>

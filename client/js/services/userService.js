@@ -1,9 +1,10 @@
-angular.module('myApp').factory('UserService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
+angular.module('myApp').factory('UserService', function ($q, $timeout, $http) {
 
 	var user = null;
 
 	return ({
 		login: login,
+		logOut: logOut,
 		createAdminAccount: createAdminAccount,
 		deleteAdminAccount: deleteAdminAccount,
 		isLoggedIn: isLoggedIn,
@@ -59,5 +60,18 @@ angular.module('myApp').factory('UserService', ['$q', '$timeout', '$http', funct
 	function deleteAdminAccount(){
 		return $http({ method: 'DELETE', url: 'api/admin/deleteadmin'});
 	}
-
-}]);
+	
+	function logOut(){		
+		
+		var deferred = $q.defer();
+				
+		$http.get('api/admin/signout').then(
+		function successCallback (res){
+			user = false;
+			deferred.resolve();
+		}, function errorCallback(res){
+			deferred.reject();
+		})
+		return deferred.promise;
+	}
+});

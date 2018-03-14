@@ -1,48 +1,53 @@
-<h1>Admin</h1>
+<h2>Admin</h2>
+
+<button type="button" ng-click="logOut()">Logout</button>
 
 <div class="menuControls">
 	
-		<h2>Menu</h2>
+	<br><br>
 		<div class="addItem">
 	
-			<h3>Add item</h3>
-			<form name="addItemForm">
+			<h4>Add item</h4>
+			<form name="addItemForm" id="addItemForm" class="form-group">
 	
-				Item Name:
-				<input type="text" ng-model="item.name">
-				<br> Item Price:
-				<input type="number" ng-model="item.price">
-				<br> Item ID:
-				<input type="number" ng-model="item.id">
-				<br>
+				<label>Item Name</label>
+				<input type="text" ng-model="item.name" class="form-control ">
+
+				<label>Item Price</label>
+				<input type="number" ng-model="item.price" class="form-control" min="0.01" step="0.01">
+
+				<label>Item ID</label>
+				<input type="number" ng-model="item.id" class="form-control">
 	
 				<button ng-click="createItem( item )">Add this item</button>
-				<br>
-				<br>
 			</form>
 		</div>
-		<div class="removeItem">
-	
-		</div>
+
+	<div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
 	
 		<div class="itemList">
+
+					<h4>Menu</h4>
+
 	
-			<table>
+			<table class="table-bordered">
 				<tr>
+					<th>ID</th>
 					<th>Name</th>
 					<th>Price</th>
 				</tr>
 	
 				<tr ng-repeat="item in allItems" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 	
+					<td>{{ item.id }}</td>
 					<td>{{ item.name }}</td>
-					<td>£{{ item.price }}</td>
+					<td>£{{ item.price.toFixed(2) }}</td>
 					<td>
-						<span>
-							<a>
-								<button type="button" ng-show="hoverEdit" ng-click="removeItem( item._id )">Delete</button>
-							</a>
-						</span>
+						<button ng-if="!item.deleted" type="button" ng-click="removeItem( item )">Delete</button>
+						<span ng-if="item.deleted">Removed from the menu</span>
+					</td>
+					<td>
+						<button type="button" ng-click="editItem( item.id )">Edit</button>
 					</td>
 	
 				</tr>

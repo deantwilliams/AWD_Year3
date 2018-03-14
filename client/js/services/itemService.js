@@ -1,27 +1,11 @@
-angular.module( 'myApp' ).factory( 'ItemService', [ '$q', '$timeout', '$http', function( $q, $timeout, $http ){
+angular.module( 'myApp' ).factory( 'ItemService', function( $q, $timeout, $http ){
 
     return ({
-      getItems: getItems,
       getItem: getItem,
+      getItems: getItems,
       createItem: createItem,
-      deleteItem: deleteItem,
       updateItem: updateItem,
-      getItemsFromOrder: getItemsFromOrder
     });
-
-
-    function createItem( item ){
-      return $http({ method: 'POST', url: '/api/items', data: item });
-    }
-
-    function deleteItem( ID ){
-      return $http({ method: 'DELETE', url: '/api/items/'+ID });
-    }
-
-    function updateItem( item ){
-      return $http({ method: 'PATCH', url: '/api/items/'+item._id, data: item });
-    }
-
 
     function getItem( id ){
 
@@ -46,6 +30,14 @@ angular.module( 'myApp' ).factory( 'ItemService', [ '$q', '$timeout', '$http', f
     }
 
 
+    function createItem( item ){
+      return $http({ method: 'POST', url: '/api/items', data: item });
+    }
+
+    function updateItem( item ){
+      return $http({ method: 'PATCH', url: '/api/items/'+item._id, data: item });
+    }
+
     function getItems(){
       
       var deferred = $q.defer();
@@ -69,34 +61,4 @@ angular.module( 'myApp' ).factory( 'ItemService', [ '$q', '$timeout', '$http', f
     }
 
 
-
-    function getItemsFromOrder( id ){
-       
-      var deferred = $q.defer();
-      var url = '/api/order/'+id+'/items'
-
-      $http.get( url ).then(
-        function successCallback( res ) {
-
-            if( res.data.items ){
-              deferred.resolve( res.data.items );
-            } else {
-              deferred.reject();
-            }
-
-        }, function errorCallback( res ){
-
-          console.log( "error: " + res.data );
-
-          deferred.reject();
-        }
-      ).catch( function( err ){
-        console.log( "caught error: " + err );
-      });
-
-      return deferred.promise;
-    }
-    
-
-
-}]);
+});

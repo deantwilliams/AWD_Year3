@@ -1,1 +1,53 @@
-<h1>Single item view</h3>
+<div ng-if="!item" class="alert alert-danger">This item does not exist</div>
+
+<div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
+	
+
+<div class="container-fluid content" ng-if="item">
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+
+            <form>
+
+
+                    <div class="form-group">
+
+                        <label for="itemName">Name</label>
+
+                        <input type="text" class="form-control" id="itemName" ng-model="item.name">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="itemName">Price</label>
+
+                        <input type="number" class="form-control" id="itemPrice" ng-model="item.price" min="0.01" step="0.01">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="itemID">Id</label>
+
+                        <input type="number" class="form-control" id="itemID" ng-model="item.id">
+
+                    </div>
+
+                    <button ng-click="updateItem()">Save</button>
+
+
+                   
+            </form>
+
+
+            
+        </div> 
+
+
+    </div><!-- row -->
+
+
+</div>

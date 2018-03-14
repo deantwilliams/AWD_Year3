@@ -3,9 +3,9 @@
 	<h3>Number of orders: {{noOfOrders}}</h3>
 	<div id="orders">
 		<div ng-repeat="order in allOrders">
-			<table class="kitchen" ng-if="!order.kitchenComplete">
+			<table class="kitchen table-bordered" ng-if="!order.kitchenComplete">
 				<tr><th colspan=4>Table {{ order.tableNumber }} Order</th></tr>
-				<tr><td colspan=4>Wait Time: <strong>{{waitTime(order.placed)}}</strong> </td><input</tr>
+				<tr><td colspan=4>Wait Time: <strong>{{waitTime(order.placed)}}</strong> </td></tr>
 				<tr><th>ID</th><th>Name</th><th>Quantity</th><th></th></tr>
 				<tr id="{{order._id}}/{{order.items.indexOf(item)}}" class="" ng-repeat="item in order.items">
 					<td>{{ item.item.id }}</td>

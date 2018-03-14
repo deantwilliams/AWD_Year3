@@ -1,4 +1,4 @@
-angular.module('myApp').controller('adminController', [ '$routeParams', '$location', '$route', '$scope', 'ItemService', 'OrderService', function( $routeParams, $location, $route, $scope, ItemService, OrderService ){
+angular.module('myApp').controller('adminController', function( $scope, ItemService, OrderService, UserService, $location ){
 
 	$scope.item = {
 
@@ -13,51 +13,47 @@ angular.module('myApp').controller('adminController', [ '$routeParams', '$locati
 
 
 	$scope.createItem = function( item ){
-
+		
+		// Check whether an item with the same id exists.
+		// If it exists, an new menu item cannot be added 
+		var itemWithId = $scope.allItems.findIndex(x => x.id == item.id);
+		
+		if(itemWithId != -1){
+			// Item with provided id already exists 			
+           $scope.errorMessage = "Cannot add item with a duplicate id.";
+		}else{
+			
 		ItemService.createItem( item ).then( function( createdItem ){ 
 
-            alert( "Menu item " + createdItem.data.name + " added successfully" );
+            //alert( "Menu item " + createdItem.data.name + " added successfully" );
             $scope.allItems.push( createdItem.data )
 
         }, function(){
 
-            alert( "Item not added" );
+         $scope.errorMessage = "Item not added";
+        })
+		}
+	}
+
+
+	$scope.removeItem = function (item) {
+		item.deleted = true;
+		ItemService.updateItem(item)
+	}
+
+	$scope.logOut = function () {
+						
+		UserService.logOut().then(function(){ 
+			$location.path("/login");			
+        }, function(){
+            alert( "Not logged out" );
         })
 	}
 
-
-	$scope.removeItem = function (itemId) {
-
-		console.log(itemId);
-
-		ItemService.deleteItem(itemId).then(function () {
-
-			var recordToDelete = $scope.allItems.findIndex(x => x._id == itemId);
-
-			$scope.allItems.splice(recordToDelete, 1);
-
-		}, function () {
-
-		})
+	$scope.editItem = function ( itemId ) {
+		
+		$location.path("/items/" + itemId);
+		
 	}
 
-
-	function findArrayIndexOfItemId(itemId) {
-		return $scope.allItems.id == itemId;
-	}
-
-	$scope.hoverIn = function () {
-		this.hoverEdit = true;
-	};
-
-	$scope.hoverOut = function () {
-		this.hoverEdit = false;
-	};
-
-	$scope.logOut = function () {
-		UserService.logOut();
-		console.log("loggedIn admin: " + localStorage.isLoggedIn);
-	}
-
-
-}]);
+});

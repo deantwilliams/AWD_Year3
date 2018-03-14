@@ -1,4 +1,6 @@
-<h1>Login</h1>
+<h2>Login</h2>
+
+<div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
 
 <form name="loginForm">
 
@@ -10,13 +12,8 @@
 	<br>
 	<br>
 
-	<!--<input type="submit" value="Go to Google" />-->
 	<button ng-click="login(user)">Login</button>
 	<br>
 	<br>
-	<!--<button ng-click="createAdminAccount()">Create admin account</button>
-	<br>
-	<br>
-	<button ng-click="deleteAdminAccount()">Delete admin account</button> -->
 
 </form>
