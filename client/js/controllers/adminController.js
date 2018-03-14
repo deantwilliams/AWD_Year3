@@ -25,8 +25,9 @@ angular.module('myApp').controller('adminController', function( $scope, ItemServ
 			
 		ItemService.createItem( item ).then( function( createdItem ){ 
 
-            //alert( "Menu item " + createdItem.data.name + " added successfully" );
             $scope.allItems.push( createdItem.data )
+           	alert("Item added")
+
 
         }, function(){
 
@@ -39,6 +40,7 @@ angular.module('myApp').controller('adminController', function( $scope, ItemServ
 	$scope.removeItem = function (item) {
 		item.deleted = true;
 		ItemService.updateItem(item)
+		alert("Item deleted")
 	}
 
 	$scope.logOut = function () {

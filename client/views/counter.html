@@ -37,12 +37,12 @@
  <td>{{ item.item.name }}</td>
  <td>£{{ item.item.price.toFixed(2) }}</td>
  <td>{{ item.quantity }}</td>
- <td>£{{ item.item.price*item.quantity }}</td>
+ <td>£{{ (item.item.price*item.quantity).toFixed(2) }}</td>
  
  </tr>
  
  <tr> <td colspan=4> <button ng-click="payNow(order)"> Pay Now</button> </td>
- <td> Total Price: £{{totalPrice(order)}}</td>
+ <td> Total Price: £{{totalPrice(order).toFixed(2)}}</td>
  </tr>
  </table>
  </div>

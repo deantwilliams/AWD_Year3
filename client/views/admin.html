@@ -37,7 +37,7 @@
 					<th>Price</th>
 				</tr>
 	
-				<tr ng-repeat="item in allItems" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+				<tr ng-repeat="item in allItems | orderBy: 'id'" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
 	
 					<td>{{ item.id }}</td>
 					<td>{{ item.name }}</td>

@@ -74,7 +74,7 @@
 			<tr ng-repeat="item in order.items">
 				<td>{{ item.item.id }}</td>
 				<td>{{ item.item.name }}</td>
-				<td>£{{ item.item.price }}</td>
+				<td>£{{ item.item.price.toFixed(2) }}</td>
 				<td><input type="number" ng-model="item.quantity" min="1" class="quantity"/></td>
 				<td><button ng-click="removeItemFromOrder( item )">Remove</button></td>
 			</tr>
