@@ -57,7 +57,7 @@ app.controller('kitchenController', function( $scope, $interval, ItemService, Or
 			OrderService.getOrder(order._id).then(function(newOrder){
 				$scope.$applyAsync( function(){
 					$scope.allOrders.push( newOrder );
-					$scope.allItemsFill(allOrders);
+					$scope.allItemsFill($scope.allOrders);
 					$scope.orderStatus($scope.allOrders);
                 });
 			})
@@ -81,6 +81,7 @@ app.controller('kitchenController', function( $scope, $interval, ItemService, Or
 	
 	$scope.allItemsFill = function(allOrders)
 	{
+		$scope.allItems = [];
 		for(var i=0;i<allOrders.length;i++)
 		{
 			for(var j=0;j<allOrders[i].items.length;j++)
